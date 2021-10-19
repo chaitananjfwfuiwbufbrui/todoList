@@ -41,8 +41,22 @@
             </div>
     </nav>
 
-    <div clss="container my-3">
-        <h2 class="text-center">Your Tasks</h2>
+    
+
+
+
+{% for mykey,myvalue in mydict.items %}
+
+    <h1>{{ mykey }} </h1>
+    {% for s in myvalue %}
+    {{s}} <br>
+    {% endfor %}
+
+{% endfor %}
+    {% comment %} <div clss="container my-3">
+    {% comment %} {% for i in allthread %} {% endcomment %}
+        {% comment %} <h2 class="text">{{i}} : </h2>
+        
         <a href="/home" target="_blank" style="position: absolute;left: 47%;top: 14%;">Add a task</a>
         <table class="table" style="margin: auto;width:800px; position: absolute; left: 23%; top: 17%;">
             <thead>
@@ -55,23 +69,24 @@
             </thead>
             <tbody>
 
-            {% for t1 in tasks %}
-              <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td>{{t1.taskTitle}}</td>
-                <td>{{t1.taskDesc}}</td>
-                {% for t2 in thread %}
-                    <tr>
+                {% for t1 in tasks %}
+                <tr>
                     <th scope="row">{{forloop.counter}}</th>
-                    <td>{{t2.Title}}</td>
+                    <td>{{t1.taskTitle}}</td>
+                    <td>{{t1.taskDesc}}</td>
+                    {% for t2 in thread %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{t2.Title}}</td>
                     </tr>
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-              </tr>
-            {% endfor %}
 
             </tbody>
         </table>
-    </div>
+    </div> {% endcomment %}
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 

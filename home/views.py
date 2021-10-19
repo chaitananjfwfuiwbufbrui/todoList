@@ -3,9 +3,10 @@ from home.models import Task,threads
 
 # Create your views here.
 def home(request):
-    allthread=threads.objects.all()
-    for i in allthread:
-        tile = Task.objects.filter(thread=i)
+    allthread = threads.objects.all()
+    # for i in allthread:
+    #     tile = Task.objects.filter(thread=i)
+    print(allthread)
     if request.method == "POST":
         context={'success': True}
         title = request.POST['title']
@@ -19,9 +20,18 @@ def home(request):
     return render(request, 'index.html',context)
 
 def tasks(request):
-    allTasks = Task.objects.all()
-    context = {'tasks':allTasks}
+    allthread = threads.objects.all()
+    datas = {}
+    for i in range(allthread.count()):
+        tile = Task.objects.filter(thread=allthread[i])
+        # print(tile)
+        datas[f'{allthread[i].Title}'] = tile 
+    context = {'mydict':datas}
     return render(request, 'tasks.html',context)
+    
+    
+  
+    
 
 def thread(request):
     allthread=threads.objects.all()
