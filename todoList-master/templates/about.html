@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous" />
+    <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}"/>
+    <title>Tasks | ToDoList</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="display:grid">
+        <div class="container-fluid">
+            <b class="navbar-brand" href="#">ToDoList</b>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+
+        </button>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="/tasks">Tasks</a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item ">
+                        <a class="nav-link active" aria-current="page" href="/list">Lists</a>
+                    </li>
+                </ul>
+
+            </div>
+            
+            <!-- Default dropstart button -->
+            <div class="btn-group dropstart" style="position: absolute;left:1500px;">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Settings
+            </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/loggedout">Logout</a></li>
+                </ul>
+            </div>
+
+
+
+    </nav>
+    {% if success %}
+    <div class="alert alert-success alert-dismissible fade show " role="alert">
+        <strong> ToDoList Updated!</strong> Your task has been added...
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    <h3>
+        <p style="width: fit-content;left: 20px;position: relative;top: 5px;">Welcome {{request.user}}!</p>
+    </h3>
+
+    <h3 style="position: relative;left: 580px;top: -10px;width: fit-content;">Your tasks</h3>
+
+
+    <div class="inputData" style="position: relative;left: 495px;width:max-content">
+        <form action="#" method="post">
+            {% csrf_token %}
+            <input type="text" id="desc" name="desc" placeholder="Add a Task">
+            <select name="tile" id="tilee" style="position: relative;left: 10px;top: 0px;">
+                            {% for mykey,myvalue in mydict.items %}
+                            <option value="tile">{{mykey}}</option>
+                            {% endfor %}
+                        </select>
+            <button type="submit" class="btn btn-primary" style="position: relative;left: 22px;top: -5px;">Save</button>
+
+        </form>
+    </div>
+
+{{form.taskDesc}}
+{{form.thread}}
+    {% comment %} <tr>
+  <td>{{ form.blank_series.label }}</td>
+  <td>{{ form.blank_series }}</td>
+</tr>
+<tr>
+  <td>{{ form.blank_number.label }}</td>
+  <td>
+    {{ form.number_from }}
+    {{ form.number_to }}
+  </td>
+</tr>
+<tr>
+  <td class="create-blank-btns">
+    <button class="create-blank-btn"><span class="material-icons">add_circle_outline</span><input type="submit" value="submit" name="create-blank"></button>
+  </td>
+</tr> {% endcomment %}
+
+
+
+
+
+
+
+    <div class="container" style="width: 275px;display: flex;padding: 0px;margin: 0px 0px;top: 200px;position:absolute;flex-direction: column;left: 230px;">
+
+        {% for mykey,myvalue in mydict.items %}
+
+        <div class="container" style="margin: 0px;display: flex;align-items: center;width: fit-content;position: relative;left: 10%;">
+            <div class="container" style="left: 0px;top: 0px;position:relative; padding: 0px;"><br> {% comment %}
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <input type="text" id="desc" name="desc" placeholder="Add a Task in {{mykey}}">
+                    <button type="submit" class="btn btn-primary" style="position: relative;left: 213px;top: -35px;">Save</button>
+                </form> {% endcomment %}
+            </div>
+            <br>
+            <!-- <select name="tile" id="Title" style="position: relative;left: 54%;top: 5%;">
+                {% for mykey,myvalue in mydict.items %}
+                <option value="{{mykey}}">{{mykey}}</option>
+                {% endfor %}
+            </select> -->
+
+            <div class="container" style="    position: relative;top: -40px;left: -195px;">
+                <h5>{{ mykey }} </h5>
+            </div>
+            <div class="container" style="    position: relative;top: 95px;left: -275px;padding: 0px;">
+                <div class="container" style="padding: 0;position: relative;width: max-content;">
+                    <!-- <hr style="left: -5%;position: relative;"> -->
+                    {% for s in myvalue %}
+                    <li>{{s}} </li><br> {% endfor %}</div>
+            </div>{% endfor %}
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.min.js" integrity="sha384-PsUw7Xwds7x08Ew3exXhqzbhuEYmA2xnwc8BuD6SEr+UmEHlX8/MCltYEodzWA4u" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

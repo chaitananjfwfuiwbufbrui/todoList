@@ -50,11 +50,11 @@
 
         <form action="#" method="post">
            {% csrf_token %} 
-            <div class="mb-3 px-5" style="width:400px">
+            {% comment %} <div class="mb-3 px-5" style="width:400px">
                 <div class="form-group"></div>
                 <label for="title" class="form-label">Task Name</label>
                 <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" />
-            </div>
+            </div> {% endcomment %}
             <div class="mb-3 px-5 " Style="width:800px">
                 <label for="desc" class="form-label">Task Description</label>
                 <textarea class="form-control" name="desc" id="desc" cols="30" rows="10"></textarea>
@@ -63,13 +63,28 @@
             <div class="mb-3 px-5 " Style="width:800px">
                 <label for="desc" class="form-label" name="tile" id="tile">Goal Duration</label>
                 <select name="select">
-                    <option>Select</option>
-                {% for t in thread %}
+                    <option value= {% for mykey in mydict.items %}
+                                    <tr>
+                        <th scope="row">{{mykey}}</th>
+                        <td>{{mykey}}</td>
+                    </tr>
+                    {% endfor %}
+                    
+                    >Select
+                    
+                    {% comment %} {% for mykey,myvalue in mydict.items %}
+                    {{ mykey }}
+                    {% endfor %}  {% endcomment %}
+                    
+
+                    </option>
+                {% comment %} {% for t in thread %}
                     <tr>
                         <th scope="row">{{forloop.counter}}</th>
                         <td>{{t.Title}}</td>
-                    </tr>
-                {% endfor %}
+                    </tr> {% endcomment %}
+
+                 
                 </select>
                 <div class="container-fluid px-1 my-3">
                     <button type="submit" class="btn btn-primary">Save</button>

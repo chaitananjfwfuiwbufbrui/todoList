@@ -14,7 +14,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+        <div class="container-fluid" style="box-sizing: page width;">
             <b class="navbar-brand" href="#">ToDoList</b>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -40,25 +40,82 @@
                 </div>
             </div>
     </nav>
+    {% if success %}
+    <div class="alert alert-success alert-dismissible fade show " role="alert">
+        <strong> ToDoList Updated!</strong> Your task has been added...
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
 
-    
+    <form action="{% url 'thread' %}" method="post">
+        {% csrf_token %}
+        <input type="text" id="tile" name="tile" placeholder="Create a List" style="position: relative;left: 110px;top: 25px;">
+        <button type="submit" class="btn btn-primary" style="position: relative;left: 110px;top: 25px;">Create</button>
+    </form>
+
+    <div class="container" style="width: 275px;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px 40px; top: 90px;position: relative;flex-direction: column;">
+
+        {% for mykey,myvalue in mydict.items %}
+
+        <!-- <div class="container" style="margin: 60px; border: 1px solid grey;display: flex;align-items: center;width: 110%;"> -->
+        <div class="container" style="margin: 60px;display: flex;align-items: center;width: 110%;">
+            <div class="container" style="left: 0px;top: -245px;position:relative; ;margin: 0px;padding: 0px;align-items: center;"><br>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    <a href="" target=""></a>
+                    <input type="text" id="desc" name="desc" placeholder="Add a Task">
+                    <input type="hidden" id="thread" name="thread" value="{{ mykey }}">
+                    <div class="container-fluid px-1 my-3" style="position: relative;left: 213px;top: -50px;">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+            <br>
+
+            <div class="container" style="position: relative;top: -305px;;
+            left: -210px;
+            ">
+                <h4>{{ mykey }} </h4>
+            </div>
+            <div class="container" style="position: relative;
+            top: 30px;
+            left: -314px;
+            padding: 0px;">
+                <div class="container" style="    padding: 0;
+                margin: 0;
+                position: relative;
+                width: 325%; top:-145px;left: 5px;">
+                    <hr>{% for s in myvalue %} {{s}} <br> {% endfor %}</div>
+            </div>{% endfor %}
+
+            <!-- <a href="/home" target="_blank">Add a List</a> -->
+
+
+        </div>
+
+    </div>
 
 
 
-{% for mykey,myvalue in mydict.items %}
 
-    <h1>{{ mykey }} </h1>
-    {% for s in myvalue %}
-    {{s}} <br>
-    {% endfor %}
 
-{% endfor %}
-    {% comment %} <div clss="container my-3">
-    {% comment %} {% for i in allthread %} {% endcomment %}
-        {% comment %} <h2 class="text">{{i}} : </h2>
-        
+
+
+
+
+
+    {% comment %}
+    <div clss="container my-3">
+        {% comment %} {% for i in allthread %} {% endcomment %} {% comment %}
+        <h2 class="text">{{i}} : </h2>
+
         <a href="/home" target="_blank" style="position: absolute;left: 47%;top: 14%;">Add a task</a>
         <table class="table" style="margin: auto;width:800px; position: absolute; left: 23%; top: 17%;">
+
             <thead>
                 <tr>
                     <th scope="col">S.No.</th>

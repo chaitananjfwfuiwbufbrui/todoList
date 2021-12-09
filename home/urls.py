@@ -19,6 +19,6 @@ from home import views
 
 urlpatterns = [
     path('',views.tasks, name='tasks'),
-    path('home',views.home, name='home'),
-    path('tasks',views.tasks, name='tasks'),
+    #path('home',views.home, name='home'),
+    path('tasks',views.threadsa, name='thread'),
 ]
